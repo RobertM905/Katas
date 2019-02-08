@@ -1,16 +1,22 @@
 class Number_converter
+    NUMERALS = {
+        1000 => 'M',
+        900 => 'CM',
+        100 => 'C',
+        90 => 'XC',
+        50 => 'L',
+        40 => 'XL',
+        10 => 'X',
+        9 => 'IX',
+        5 => 'V',
+        4 => 'IV',
+        1 => 'I'
+    }
+
     def convert(input)
-        numerals = {
-            10 => 'X',
-            9 => 'IX',
-            5 => 'V',
-            4 => 'IV',
-            1 => 'I'
-        }
-        
         output = ''
 
-        numerals.each do | number_value, roman_numeral |
+        NUMERALS.each do | number_value, roman_numeral |
             while input >= number_value
                 output += roman_numeral
                 input -= number_value
@@ -62,4 +68,35 @@ describe Number_converter do
         expect(subject.convert(17)).to eq('XVII')
     end
 
+    it "returns XL when number is 40" do
+        expect(subject.convert(40)).to eq('XL')
+    end
+
+    it "returns L when number is 50" do
+        expect(subject.convert(50)).to eq('L')
+    end
+
+    it "returns LXV when number is 65" do
+        expect(subject.convert(65)).to eq('LXV')
+    end
+
+    it "returns XC when number is 90" do
+        expect(subject.convert(90)).to eq('XC')
+    end
+
+    it "returns C when number is 100" do
+        expect(subject.convert(100)).to eq('C')
+    end
+
+    it "returns CM when number is 900" do
+        expect(subject.convert(900)).to eq('CM')
+    end
+
+    it "return M when number is 1000" do
+        expect(subject.convert(1000)).to eq('M')
+    end 
+
+    it "returns MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMCMXCIX when number is 99999" do
+        expect(subject.convert(99999)).to eq('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMCMXCIX')
+    end
 end
