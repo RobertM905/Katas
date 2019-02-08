@@ -1,12 +1,12 @@
 class Number_converter
     def convert(input)
-        numerals = [
-            [10, 'X'],
-            [9, 'IX'],
-            [5, 'V'],
-            [4, 'IV'],
-            [1, 'I']
-        ]
+        numerals = {
+            10 => 'X',
+            9 => 'IX',
+            5 => 'V',
+            4 => 'IV',
+            1 => 'I'
+        }
         
         output = ''
 
@@ -56,6 +56,10 @@ describe Number_converter do
 
     it "returns X when number is 10" do 
         expect(subject.convert(10)).to eq('X')
+    end
+
+    it "returns XVII when number is 17" do
+        expect(subject.convert(17)).to eq('XVII')
     end
 
 end
