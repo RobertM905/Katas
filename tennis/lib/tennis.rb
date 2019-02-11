@@ -1,10 +1,5 @@
 class Tennis
-  POINTS = {
-    0 => '0',
-    1 => '15',
-    2 => '30',
-    3 => '40'
-  }
+  POINTS = %w[0 15 30 40].freeze
 
   def initialize
     @player_one_points = 0
@@ -12,12 +7,13 @@ class Tennis
   end
 
   def score
+    return 'Deuce' if deuce?
     return 'Advantage player one' if advantage_player_one?
     return 'Advantage player two' if advantage_player_two?
     return 'Player one wins' if win_player_one?
     return 'Player two wins' if win_player_two?
-    return 'Deuce' if deuce?
-    POINTS[@player_one_points] + "-" +POINTS[@player_two_points]
+
+    "#{POINTS[@player_one_points]}-#{POINTS[@player_two_points]}"
   end
 
   def win_point(player)
